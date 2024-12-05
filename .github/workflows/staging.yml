@@ -1,15 +1,20 @@
 name: Deploy to Staging
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - develop
   workflow_dispatch:
 
 jobs:
   supabase-deploy:
-    uses: ./.github/workflows/_supabase-staging.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Supabase Deploy
+        uses: ./.github/workflows/_supabase-staging.yml
 
   eas-build:
     needs: supabase-deploy
