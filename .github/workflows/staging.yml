@@ -17,9 +17,12 @@ jobs:
         uses: ./.github/actions/_supabase-staging.yml
 
   eas-build:
+    runs-on: ubuntu-latest
     needs: supabase-deploy
-    uses: ./.github/actions/_eas-build.yml
-    with:
-      platform: 'all'
-      profile: 'preview'
-    secrets: inherit
+
+    steps:
+    - name: EAS Build
+      uses: ./.github/actions/_eas-build.yml
+      with:
+        platform: 'all'
+        profile: 'preview'
