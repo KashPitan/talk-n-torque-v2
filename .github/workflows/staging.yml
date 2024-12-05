@@ -9,20 +9,13 @@ on:
 
 jobs:
   supabase-deploy:
-    runs-on: ubuntu-latest
     # Only run if the PR was merged (not just closed)
     # if: github.event.pull_request.merged == true
-    steps:
-      - name: Supabase Deploy
-        uses: ./.github/workflows/_supabase-staging.yml
+    uses: ./.github/workflows/_supabase-staging.yml
 
   eas-build:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/_eas-build.yml
+    with:
+      platform: "all"
+      profile: "preview"
     needs: supabase-deploy
-
-    steps:
-      - name: EAS Build
-        uses: ./.github/workflows/_eas-build.yml
-        with:
-          platform: "all"
-          profile: "preview"
