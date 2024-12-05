@@ -14,11 +14,11 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - name: Supabase Deploy
-        uses: ./.github/workflows/_supabase-staging.yml
+        uses: ./.github/actions/_supabase-staging.yml
 
   eas-build:
     needs: supabase-deploy
-    uses: ./.github/workflows/_eas-build.yml
+    uses: ./.github/actions/_eas-build.yml
     with:
       platform: 'all'
       profile: 'preview'
