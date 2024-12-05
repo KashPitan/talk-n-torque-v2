@@ -12,10 +12,12 @@ jobs:
     # Only run if the PR was merged (not just closed)
     # if: github.event.pull_request.merged == true
     uses: ./.github/workflows/_supabase-staging.yml
+    secrets: inherit
 
   eas-build:
     uses: ./.github/workflows/_eas-build.yml
     with:
       platform: "all"
       profile: "preview"
+    secrets: inherit
     needs: supabase-deploy
