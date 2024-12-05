@@ -19,5 +19,5 @@ jobs:
         with:
           version: latest
 
-      - run: supabase link --project-ref $SUPABASE_STAGING_PROJECT_ID --debug
+      - run: supabase link --project-ref ${{ vars.SUPABASE_STAGING_PROJECT_ID }} --debug
       - run: supabase db push --debug
