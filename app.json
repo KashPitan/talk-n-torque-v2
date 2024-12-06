@@ -1,5 +1,4 @@
 {
-  "owner": "kashpitan",
   "expo": {
     "name": "talk-n-torque-v2",
     "slug": "talk-n-torque-v2",
@@ -30,6 +29,7 @@
       "eas": {
         "projectId": "59a658ed-b699-40f7-9d71-f2e91847ee02"
       }
-    }
+    },
+    "owner": "kashpitan"
   }
 }
