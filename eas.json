@@ -10,33 +10,21 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      },
-      "ios": {
-        "bundleIdentifier": "com.kashpitan.talkntorquev2"
       }
     },
     "preview": {
       "distribution": "internal",
-      "environment": "preview",
-      "ios": {
-        "bundleIdentifier": "com.kashpitan.talkntorquev2"
-      }
+      "environment": "preview"
     },
     "preview-apk": {
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      },
-      "ios": {
-        "bundleIdentifier": "com.kashpitan.talkntorquev2"
       }
     },
     "production": {
       "autoIncrement": true,
-      "environment": "production",
-      "ios": {
-        "bundleIdentifier": "com.kashpitan.talkntorquev2"
-      }
+      "environment": "production"
     }
   },
   "submit": {
