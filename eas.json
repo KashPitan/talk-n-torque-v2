@@ -14,7 +14,10 @@
     },
     "preview": {
       "distribution": "internal",
-      "environment": "preview"
+      "environment": "preview",
+      "ios": {
+        "bundleIdentifier": "com.kashpitan.talkntorquev2"
+      }
     },
     "preview-apk": {
       "distribution": "internal",
