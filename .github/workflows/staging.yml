@@ -9,15 +9,21 @@ on:
 
 jobs:
   supabase-deploy:
-    # Only run if the PR was merged (not just closed)
-    # if: github.event.pull_request.merged == true
     uses: ./.github/workflows/_supabase-staging.yml
     secrets: inherit
 
-  eas-build:
+  eas-build-android:
     uses: ./.github/workflows/_eas-build.yml
     with:
-      platform: "all"
+      platform: "android"
+      profile: "preview"
+    secrets: inherit
+    needs: supabase-deploy
+
+  eas-build-ios:
+    uses: ./.github/workflows/_eas-build.yml
+    with:
+      platform: "ios"
       profile: "preview"
     secrets: inherit
     needs: supabase-deploy
