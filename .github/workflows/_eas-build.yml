@@ -3,15 +3,15 @@ on:
   workflow_call:
     inputs:
       platform:
-        description: 'Platform to build for (ios, android, or all)'
+        description: "Platform to build for (ios, android, or all)"
         required: false
         type: string
-        default: 'all'
+        default: "all"
       profile:
-        description: 'Build profile to use (development, preview, or production)'
+        description: "Build profile to use (development, preview, or production)"
         required: false
         type: string
-        default: 'preview'
+        default: "preview"
 
 jobs:
   build:
@@ -31,5 +31,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build on EAS
-        run: eas build --platform ${{ inputs.platform }} --profile ${{ inputs.profile }} --non-interactive --no-wait
-
+        run: eas build --platform ${{ inputs.platform }} --profile ${{ inputs.profile }} --non-interactive
