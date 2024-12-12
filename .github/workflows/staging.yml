@@ -6,10 +6,6 @@ on:
       - develop
   workflow_dispatch:
 
-env:
-  EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
-  EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,13 +22,16 @@ jobs:
     with:
       platform: "android"
       profile: "preview"
+      EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
     secrets: inherit
     needs: supabase-deploy
 
-  eas-build-ios:
-    uses: ./.github/workflows/_eas-build.yml
-    with:
-      platform: "ios"
-      profile: "preview"
-    secrets: inherit
-    needs: supabase-deploy
+  # commented out til ios build credentials are set
+  # eas-build-ios:
+  #   uses: ./.github/workflows/_eas-build.yml
+  #   with:
+  #     platform: "ios"
+  #     profile: "preview"
+  #   secrets: inherit
+  #   needs: supabase-deploy
