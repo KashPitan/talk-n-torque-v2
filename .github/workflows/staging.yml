@@ -11,6 +11,12 @@ env:
   EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read an env variable
+        run: echo "My vars.EXPO_PUBLIC_SUPABASE_ANON_KEY value is ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }} (also accessible as $MY_vars.EXPO_PUBLIC_SUPABASE_ANON_KEY)"
+
   supabase-deploy:
     uses: ./.github/workflows/_supabase-staging.yml
     secrets: inherit
