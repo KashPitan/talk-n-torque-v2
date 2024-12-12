@@ -6,6 +6,10 @@ on:
       - develop
   workflow_dispatch:
 
+env:
+  EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+  EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
+
 jobs:
   supabase-deploy:
     uses: ./.github/workflows/_supabase-staging.yml

@@ -12,11 +12,22 @@ on:
         required: false
         type: string
         default: "preview"
+      EXPO_PUBLIC_SUPABASE_URL:
+        description: "Supabase URL for the app"
+        required: false
+        type: string
+      EXPO_PUBLIC_SUPABASE_ANON_KEY:
+        description: "Supabase anonymous key for the app"
+        required: false
+        type: string
 
 jobs:
   build:
     name: Install and build
     runs-on: ubuntu-latest
+    env:
+      EXPO_PUBLIC_SUPABASE_URL: ${{ inputs.EXPO_PUBLIC_SUPABASE_URL }}
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ inputs.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
