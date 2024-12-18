@@ -1,0 +1,25 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema", "prismaSchemaFolder"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  schemas   = ["auth", "public"]
+}
+
+model User {
+  id                      String     @id() @db.Uuid
+  display_name            String
+  email                   String
+  car                     String?
+  is_approved             Boolean    @default(false)
+  push_notification_token String?
+  created_at              DateTime   @default(now())
+  updated_at              DateTime   @updatedAt
+  users                   auth_users @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@schema("public")
+}
