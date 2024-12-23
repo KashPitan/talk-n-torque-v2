@@ -79,18 +79,22 @@ export default function Account({ session }: { session: Session }) {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled />
+        <TextInput
+          // label="Email"
+          value={session?.user?.email}
+          //  disabled
+        />
       </View>
       <View style={styles.verticallySpaced}>
-        <Input
-          label="Username"
+        <TextInput
+          // label="Username"
           value={username || ""}
           onChangeText={(text) => setUsername(text)}
         />
       </View>
       <View style={styles.verticallySpaced}>
-        <Input
-          label="Website"
+        <TextInput
+          // label="Website"
           value={website || ""}
           onChangeText={(text) => setWebsite(text)}
         />

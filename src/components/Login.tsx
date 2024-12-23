@@ -81,14 +81,14 @@ export default function Auth() {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              label="Email"
-              leftIcon={{ type: "font-awesome", name: "envelope" }}
+            <TextInput
+              // label="Email"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
               onChangeText={onChange}
               value={value}
               placeholder="email@address.com"
               autoCapitalize={"none"}
-              errorMessage={errors.email?.message}
+              // errorMessage={errors.email?.message}
             />
           )}
         />
@@ -105,15 +105,15 @@ export default function Auth() {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              label="Password"
-              leftIcon={{ type: "font-awesome", name: "lock" }}
+            <TextInput
+              // label="Password"
+              // leftIcon={{ type: "font-awesome", name: "lock" }}
               onChangeText={onChange}
               value={value}
               secureTextEntry={true}
               placeholder="Password"
               autoCapitalize={"none"}
-              errorMessage={errors.password?.message}
+              // errorMessage={errors.password?.message}
             />
           )}
         />
