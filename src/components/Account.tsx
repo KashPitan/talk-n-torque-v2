@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
-import { StyleSheet, View, Alert } from "react-native";
-import { Button, Input } from "@rneui/themed";
+import { StyleSheet, View, Alert, Button, TextInput } from "react-native";
 import { Session } from "@supabase/supabase-js";
 
 export default function Account({ session }: { session: Session }) {

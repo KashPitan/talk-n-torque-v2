@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, View, AppState } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  View,
+  AppState,
+  Button,
+  TextInput,
+} from "react-native";
 import { supabase } from "../../lib/supabase";
-import { Button, Input } from "@rneui/themed";
 import { useForm, Controller } from "react-hook-form";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
