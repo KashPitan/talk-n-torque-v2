@@ -7,8 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  supabase-deploy:
-    uses: ./.github/workflows/_supabase-staging.yml
+  prisma-deploy:
+    uses: ./.github/workflows/_prisma-deploy.yml
+    with:
+      DATABASE_URL: ${{ secrets.STAGING_DB_URL }}
+      DIRECT_URL: ${{ secrets.STAGING_DB_DIRECT_URL }}
     secrets: inherit
 
   eas-build-android:
@@ -17,7 +20,7 @@ jobs:
       platform: "android"
       profile: "preview"
     secrets: inherit
-    needs: supabase-deploy
+    needs: prisma-deploy
 
   # commented out til ios build credentials are set
   # eas-build-ios:
