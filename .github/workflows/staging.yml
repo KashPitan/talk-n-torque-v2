@@ -10,8 +10,8 @@ jobs:
   prisma-deploy:
     uses: ./.github/workflows/_prisma-deploy.yml
     with:
-      DATABASE_URL: ${{ secrets.STAGING_DB_URL }}
-      DIRECT_URL: ${{ secrets.STAGING_DB_DIRECT_URL }}
+      DATABASE_URL: ${{ vars.STAGING_DB_URL }}
+      DIRECT_URL: ${{ vars.STAGING_DB_DIRECT_URL }}
     secrets: inherit
 
   eas-build-android:
