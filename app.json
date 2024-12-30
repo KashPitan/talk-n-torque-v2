@@ -17,6 +17,8 @@
       "bundleIdentifier": "com.kashpitan.talkntorquev2"
     },
     "android": {
+      "bundler": "metro",
+
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -24,7 +26,8 @@
       "package": "com.kashpitan.talkntorquev2"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "extra": {
       "eas": {
