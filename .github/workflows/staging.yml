@@ -14,13 +14,18 @@ jobs:
       DIRECT_URL: ${{ vars.STAGING_DB_DIRECT_URL }}
     secrets: inherit
 
+  supabase-deploy:
+    uses: ./.github/workflows/_supabase-deploy-functions.yml
+    secrets: inherit
+    needs: prisma-deploy
+
   eas-build-android:
     uses: ./.github/workflows/_eas-build.yml
     with:
       platform: "android"
       profile: "preview"
     secrets: inherit
-    needs: prisma-deploy
+    needs: supabase-deploy
 
   # commented out til ios build credentials are set
   # eas-build-ios:
