@@ -14,7 +14,7 @@ jobs:
       DIRECT_URL: ${{ vars.STAGING_DB_DIRECT_URL }}
     secrets: inherit
 
-  supabase-deploy:
+  functions-deploy:
     uses: ./.github/workflows/_supabase-deploy-functions.yml
     secrets: inherit
     needs: prisma-deploy
@@ -25,7 +25,7 @@ jobs:
       platform: "android"
       profile: "preview"
     secrets: inherit
-    needs: supabase-deploy
+    needs: functions-deploy
 
   # commented out til ios build credentials are set
   # eas-build-ios:
