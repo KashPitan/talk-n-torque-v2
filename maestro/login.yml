@@ -1,0 +1,5 @@
+appId: com.kashpitan.talkntorquev2
+---
+- launchApp
+- tapOn: "Sign in"
+- assertVisible: "Sign up"
