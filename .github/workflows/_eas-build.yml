@@ -11,6 +11,11 @@ on:
         description: "Build profile to use (development, preview, or production)"
         required: true
         type: string
+      no-wait:
+        description: "Wait for the eas build to finish before progressing"
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   build:
@@ -30,4 +35,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build on EAS
-        run: eas build --platform ${{ inputs.platform }} --profile ${{ inputs.profile }} --non-interactive
+        run: eas build --platform ${{ inputs.platform }} --profile ${{ inputs.profile }} --non-interactive ${{ inputs.no-wait && '--no-wait' }}
