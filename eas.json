@@ -12,6 +12,18 @@
         "buildType": "apk"
       }
     },
+    "build-and-maestro-test": {
+      "withoutCredentials": true,
+      "config": "build-and-maestro-test.yml",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true,
+        "image": "latest"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "environment": "preview"
