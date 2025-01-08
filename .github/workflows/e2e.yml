@@ -7,7 +7,7 @@ on:
         description: "Platform to build for (ios, android, or all)"
         required: false
         type: string
-        default: "all"
+        default: all
   workflow_dispatch:
 
 jobs:
