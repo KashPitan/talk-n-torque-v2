@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kashpitan.talkntorquev2"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,12 +24,14 @@
       "package": "com.kashpitan.talkntorquev2"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "extra": {
       "eas": {
         "projectId": "59a658ed-b699-40f7-9d71-f2e91847ee02"
       }
-    }
+    },
+    "owner": "kashpitan"
   }
 }

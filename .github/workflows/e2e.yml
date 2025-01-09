@@ -1,4 +1,5 @@
-name: EAS Build
+name: Run E2E tests
+
 on:
   workflow_call:
     inputs:
@@ -7,15 +8,13 @@ on:
         required: false
         type: string
         default: "all"
-      profile:
-        description: "Build profile to use (development, preview, or production)"
-        required: true
-        type: string
-      no-wait:
-        description: "Wait for the eas build to finish before progressing"
-        type: boolean
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "Platform to build for (ios, android, or all)"
         required: false
-        default: false
+        type: string
+        default: "all"
 
 jobs:
   build:
@@ -35,4 +34,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build on EAS
-        run: eas build --platform ${{ inputs.platform }} --profile ${{ inputs.profile }} --non-interactive ${{ inputs.no-wait && '--no-wait' }}
+        run: eas build --platform ${{ inputs.platform }} --profile build-and-maestro-test --non-interactive

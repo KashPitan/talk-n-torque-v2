@@ -1,8 +1,18 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet, View, AppState } from "react-native";
+import { useState } from "react";
+import {
+  Alert,
+  StyleSheet,
+  View,
+  AppState,
+  // Button,
+  TextInput,
+} from "react-native";
 import { supabase } from "../../lib/supabase";
-import { Button, Input } from "@rneui/themed";
 import { useForm, Controller } from "react-hook-form";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { Input } from "~/components/ui/input";
+import * as React from "react";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -76,13 +86,13 @@ export default function Auth() {
           }}
           render={({ field: { onChange, value } }) => (
             <Input
-              label="Email"
-              leftIcon={{ type: "font-awesome", name: "envelope" }}
+              // label="Email"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
               onChangeText={onChange}
               value={value}
               placeholder="email@address.com"
               autoCapitalize={"none"}
-              errorMessage={errors.email?.message}
+              // errorMessage={errors.email?.message}
             />
           )}
         />
@@ -100,31 +110,35 @@ export default function Auth() {
           }}
           render={({ field: { onChange, value } }) => (
             <Input
-              label="Password"
-              leftIcon={{ type: "font-awesome", name: "lock" }}
+              // label="Password"
+              // leftIcon={{ type: "font-awesome", name: "lock" }}
               onChangeText={onChange}
               value={value}
               secureTextEntry={true}
               placeholder="Password"
               autoCapitalize={"none"}
-              errorMessage={errors.password?.message}
+              // errorMessage={errors.password?.message}
             />
           )}
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
-          title="Sign in"
-          disabled={loading}
+          // title="Sign in"
+          // disabled={loading}
           onPress={handleSubmit(signInWithEmail)}
-        />
+        >
+          <Text>Sign in</Text>
+        </Button>
       </View>
       <View style={styles.verticallySpaced}>
         <Button
-          title="Sign up"
-          disabled={loading}
+          // title="Sign up"
+          // disabled={loading}
           onPress={handleSubmit(signUpWithEmail)}
-        />
+        >
+          <Text>Sign up</Text>
+        </Button>
       </View>
     </View>
   );
