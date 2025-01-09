@@ -34,4 +34,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build on EAS
-        run: eas build --platform ${{ inputs.platform }} --profile build-and-maestro-test
+        run: eas build --platform ${{ inputs.platform }} --profile build-and-maestro-test --non-interactive
