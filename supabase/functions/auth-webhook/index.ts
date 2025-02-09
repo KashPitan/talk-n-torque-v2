@@ -2,7 +2,6 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { db } from "../common/db/db.ts";
 import { usersTable } from "../common/db/schema.ts";
 import { AuthUserInsertEvent } from "../common/schemas.ts";
-// import { corsHeaders } from "../common/cors.ts";
 
 Deno.serve(async (req) => {
   console.log("auth-webhook invoked");
