@@ -1,4 +1,3 @@
-// Will load the .env file to Deno.env
 import "https://deno.land/x/dotenv@v3.2.2/load.ts";
 import { expect } from "jsr:@std/expect";
 import { beforeAll, afterAll, describe, it } from "jsr:@std/testing/bdd";
@@ -8,9 +7,9 @@ import { usersTable } from "../common/db/schema.ts";
 import { eq } from "drizzle-orm";
 
 import { v4 as uuidv4 } from "uuid";
-import { DbClient, getDbClient } from "./test-utils/db-test.ts";
-import { retryAssertion } from "./test-utils/retryAssertion.ts";
-import { getSupabaseClient } from "./test-utils/drizzle-client.ts";
+import { DbClient, getDbClient } from "../test-utils/db-test.ts";
+import { retryAssertion } from "../test-utils/retryAssertion.ts";
+import { getSupabaseClient } from "../test-utils/drizzle-client.ts";
 
 const client = getSupabaseClient();
 
