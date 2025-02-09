@@ -1,18 +1,13 @@
 import { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  View,
-  AppState,
-  // Button,
-  TextInput,
-} from "react-native";
+import { Alert, StyleSheet, View, AppState } from "react-native";
 import { supabase } from "../../lib/supabase";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { Input } from "~/components/ui/input";
+
 import * as React from "react";
+import FormInput from "./FormInput";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -33,11 +28,14 @@ type FormData = {
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
+    mode: "onSubmit",
+    reValidateMode: "onSubmit",
     defaultValues: {
       email: "",
       password: "",
@@ -46,28 +44,18 @@ export default function Auth() {
 
   async function signInWithEmail(data: FormData) {
     setLoading(true);
+    setLoginError(false);
     const { error } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
     });
 
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-  }
+    console.log(error);
 
-  async function signUpWithEmail(data: FormData) {
-    setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: data.email,
-      password: data.password,
-    });
+    if (error) setLoginError(true);
+    if (!error) {
+    }
 
-    if (error) Alert.alert(error.message);
-    if (!session)
-      Alert.alert("Please check your inbox for email verification!");
     setLoading(false);
   }
 
@@ -85,15 +73,18 @@ export default function Auth() {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              // label="Email"
-              // leftIcon={{ type: "font-awesome", name: "envelope" }}
-              onChangeText={onChange}
-              value={value}
-              placeholder="email@address.com"
-              autoCapitalize={"none"}
-              // errorMessage={errors.email?.message}
-            />
+            <FormInput
+              label="Name"
+              id="name"
+              error={errors.email ? errors.email.message : undefined}
+            >
+              <Input
+                onChangeText={onChange}
+                value={value}
+                placeholder="email@address.com"
+                autoCapitalize={"none"}
+              />
+            </FormInput>
           )}
         />
       </View>
@@ -109,36 +100,29 @@ export default function Auth() {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              // label="Password"
-              // leftIcon={{ type: "font-awesome", name: "lock" }}
-              onChangeText={onChange}
-              value={value}
-              secureTextEntry={true}
-              placeholder="Password"
-              autoCapitalize={"none"}
-              // errorMessage={errors.password?.message}
-            />
+            <FormInput
+              label="Password"
+              id="password"
+              error={errors.password ? errors.password.message : undefined}
+            >
+              <Input
+                onChangeText={onChange}
+                value={value}
+                secureTextEntry={true}
+                placeholder="Password"
+                autoCapitalize={"none"}
+              />
+            </FormInput>
           )}
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          // title="Sign in"
-          // disabled={loading}
-          onPress={handleSubmit(signInWithEmail)}
-        >
+        <Button disabled={loading} onPress={handleSubmit(signInWithEmail)}>
           <Text>Sign in</Text>
         </Button>
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button
-          // title="Sign up"
-          // disabled={loading}
-          onPress={handleSubmit(signUpWithEmail)}
-        >
-          <Text>Sign up</Text>
-        </Button>
+        {loginError && (
+          <Text style={{ color: "red" }}>Incorrect login details</Text>
+        )}
       </View>
     </View>
   );

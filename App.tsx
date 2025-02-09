@@ -1,19 +1,28 @@
+import "./gesture-handler";
 import { useState, useEffect } from "react";
+import * as React from "react";
+import { View, Platform } from "react-native";
+
 import { supabase } from "./lib/supabase";
-import Login from "./src/components/Login";
-import Account from "./src/components/Account";
-import { View } from "react-native";
 import { Session } from "@supabase/supabase-js";
 
-import "./global.css";
+import {
+  NavigationContainer,
+  Theme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Theme, ThemeProvider } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { Platform } from "react-native";
 import { NAV_THEME } from "~/lib/constants";
 import { useColorScheme } from "~/lib/useColorScheme";
-import * as React from "react";
+
+import Login from "./src/components/Login";
+import Home from "./src/screens/Home";
+// import Account from "./src/components/Account";
+
+import "./global.css";
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -60,6 +69,8 @@ const DARK_THEME: Theme = {
   },
 };
 
+const Stack = createStackNavigator();
+
 export default function RootLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
@@ -90,6 +101,9 @@ export default function RootLayout() {
   }, []);
 
   const [session, setSession] = useState<Session | null>(null);
+  const [initialRouteName, setInitialRouteName] = useState<"Home" | "Login">(
+    "Login"
+  );
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -101,6 +115,13 @@ export default function RootLayout() {
     });
   }, []);
 
+  useEffect(() => {
+    if (session) {
+      console.log("test");
+      setInitialRouteName("Home");
+    }
+  }, [session]);
+
   if (!isColorSchemeLoaded) {
     return null;
   }
@@ -108,13 +129,24 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <View>
-        {session && session.user ? (
-          <Account key={session.user.id} session={session} />
-        ) : (
-          <Login />
-        )}
-      </View>
+      <NavigationContainer>
+        {/* <View>
+          {session && session.user ? (
+            <Account key={session.user.id} session={session} />
+          ) : (
+            <Login />
+          )}
+        </View> */}
+        <Stack.Navigator
+          initialRouteName={initialRouteName}
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
