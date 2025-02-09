@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import Auth from "../Login";
 import { supabase } from "../../../lib/supabase";
 import { Alert } from "react-native";
+import { AuthError } from "@supabase/supabase-js";
 
 // Mock the supabase client
 jest.mock("../../../lib/supabase", () => ({
@@ -15,6 +16,28 @@ jest.mock("../../../lib/supabase", () => ({
     },
   },
 }));
+
+const mockUser = {
+  id: "mock-user-id",
+  app_metadata: {},
+  user_metadata: {},
+  aud: "authenticated",
+  created_at: "2024-01-01T00:00:00.000Z",
+};
+
+const mockSession = {
+  access_token: "mock-access-token",
+  refresh_token: "mock-refresh-token",
+  expires_in: 3600,
+  token_type: "bearer",
+  user: {
+    id: "mock-user-id",
+    app_metadata: {},
+    user_metadata: {},
+    aud: "authenticated",
+    created_at: "2024-01-01T00:00:00.000Z",
+  },
+};
 
 describe("Auth Component", () => {
   beforeEach(() => {
@@ -31,7 +54,13 @@ describe("Auth Component", () => {
 
   it("handles sign in with valid credentials", async () => {
     const mockSignIn = jest.spyOn(supabase.auth, "signInWithPassword");
-    mockSignIn.mockResolvedValueOnce({ error: null });
+    mockSignIn.mockResolvedValueOnce({
+      data: {
+        user: mockUser,
+        session: mockSession,
+      },
+      error: null,
+    });
 
     const { getByPlaceholderText, getByText } = render(<Auth />);
 
@@ -55,7 +84,8 @@ describe("Auth Component", () => {
   it.skip("shows error alert when sign in fails", async () => {
     const mockSignIn = jest.spyOn(supabase.auth, "signInWithPassword");
     mockSignIn.mockResolvedValueOnce({
-      error: { message: "Invalid credentials" },
+      data: { user: null, session: null },
+      error: new AuthError("Invalid credentials", 400, "invalid_credentials"),
     });
 
     const mockAlert = jest.spyOn(Alert, "alert");

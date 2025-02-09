@@ -9,5 +9,8 @@ module.exports = {
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(react-native|@react-native|@react-navigation|@rneui|react-native-reanimated|@rn-primitives)/)",
+  ],
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
 };
